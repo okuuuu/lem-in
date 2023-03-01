@@ -4,7 +4,7 @@ import (
 	"bufio"
 )
 
-func Solve(scanner *bufio.Scanner) (*Result, error) {
+func Solve(scanner *bufio.Scanner) error {
 	farm := PopulateFarm()
 	var err error
 	for scanner.Scan() {
@@ -17,5 +17,5 @@ func Solve(scanner *bufio.Scanner) (*Result, error) {
 	if err != nil {
 		panic(err)
 	}
-	return farm.Result, nil
+	return nil
 }

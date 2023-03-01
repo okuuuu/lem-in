@@ -1,19 +1,24 @@
 package antfarm
 
 type room struct {
-	Name                string // Name
-	X, Y                int    // Coordinates
-	Paths               []*room
-	ParentIn, ParentOut *room // Store parents for new path
-	VisitIn, VisitOut   bool  // Flag for checking while traversing
-	Next                *room
+	Name    string // Name
+	X, Y    int    // Coordinates
+	Paths   []*room
+	Parent  *room // Store parents for new path
+	Visit   bool  // Flag for checking while traversing
+	Blocked bool
 }
 
 // List of Room nodes. Used to store found paths
 type list struct {
 	Len   int
-	Front *room
-	Back  *room
+	Front *node
+	Back  *node
+}
+
+type node struct {
+	Room *room
+	Next *node
 }
 
 type antfarm struct {
@@ -22,10 +27,5 @@ type antfarm struct {
 	Rooms      map[string]*room
 	StepsCount int
 	State      int
-	Result     *Result
-}
-
-type Result struct {
-	Ants  int
-	Paths []*list
+	Paths      []*list
 }

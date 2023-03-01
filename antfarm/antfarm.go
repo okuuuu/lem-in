@@ -10,8 +10,8 @@ import (
 func PopulateFarm() *antfarm {
 	farm := &antfarm{}
 	farm.Rooms = make(map[string]*room)
-	farm.Result = &Result{}
 	farm.State = 0
+	farm.Paths = []*list{}
 	return farm
 }
 
@@ -23,23 +23,23 @@ func (a *antfarm) ReadLine(line string) error {
 	}
 	// Ants fields
 	if a.State == 0 {
-		err := a.AddAnts(line)
-		if err != nil {
-			return err
-		}
 		if line == "##start" {
 			a.State = 1
 			return nil
 		}
-		// Rooms fields
-	} else if a.State == 1 {
-		err := a.AddRoom(line, a.State)
+		err := a.AddAnts(line)
 		if err != nil {
 			return err
 		}
+		// Rooms fields
+	} else if a.State == 1 {
 		if line == "##end" {
 			a.State = 2
 			return nil
+		}
+		err := a.AddRoom(line, a.State)
+		if err != nil {
+			return err
 		}
 		// End room field
 	} else if a.State == 2 {
@@ -68,7 +68,6 @@ func (a *antfarm) AddAnts(line string) error {
 		return errors.New("ants have already been recorded")
 	}
 	a.Ants = ants
-	a.Result.Ants = ants
 	return nil
 }
 
@@ -99,7 +98,7 @@ func (a *antfarm) AddRoom(line string, state int) error {
 	a.Rooms[name] = room
 
 	// Mark Start and End rooms
-	if state == 1 && len(a.Rooms) == 0 {
+	if state == 1 && len(a.Rooms) == 1 {
 		a.Start = name
 	} else if state == 2 {
 		a.End = name
@@ -133,7 +132,7 @@ func (a *antfarm) FindResult() error {
 			}
 			return errors.New("path not found")
 		}
-		if !checkPath(a) {
+		if !checkPaths(a) {
 			return nil
 		}
 	}
