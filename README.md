@@ -8,11 +8,11 @@ This project is meant to write a simplified digital version of an [ant farm](htt
 
 **The current project is 80% complete.**
 
-Folder <code>res</code> contains several functions, files and structures required for the main code.
+File <code>antfarm/antfarm.go</code> contains all functions used for initializing and populating an antfarm using file contents.
 
-Folder <code>server</code> contains functions needed to run the server.
+File <code>antfarm/bfs.go</code> contains the push-pull functions for linked list which have been used to make queues for FIFO method. The file contains the BFS algorithm itself.
 
-Folders <code>templates</code> and <code>static</code> contain HTML, CSS and JavaScript files.
+Files <code>antfarm/solve.go</code> and <code>antfarm/structs.go</code> contain auxilary functions to get and process the final result as well ass the structures used throughout the program.
 
 ### Allowed Packages
 

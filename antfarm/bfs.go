@@ -1,5 +1,7 @@
 package antfarm
 
+import "errors"
+
 func findPath(farm *antfarm) bool {
 	queue := &list{}
 	start := farm.Rooms[farm.Start]
@@ -71,5 +73,20 @@ func Reset(farm *antfarm) {
 	for _, room := range farm.Rooms {
 		room.Parent = nil
 		room.Visit = false
+	}
+}
+
+func (a *antfarm) FindResult() error {
+	for {
+		if !findPath(a) {
+			// path not found, then check for prev path count
+			if a.StepsCount > 0 {
+				return nil
+			}
+			return errors.New("path not found")
+		}
+		if !checkPaths(a) {
+			return nil
+		}
 	}
 }

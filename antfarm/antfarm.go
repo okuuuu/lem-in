@@ -122,18 +122,3 @@ func (a *antfarm) AddPath(line string) error {
 	room2.Paths = append(room2.Paths, room1)
 	return nil
 }
-
-func (a *antfarm) FindResult() error {
-	for {
-		if !findPath(a) {
-			// path not found, then check for prev path count
-			if a.StepsCount > 0 {
-				return nil
-			}
-			return errors.New("path not found")
-		}
-		if !checkPaths(a) {
-			return nil
-		}
-	}
-}
