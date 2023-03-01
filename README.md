@@ -12,7 +12,7 @@ File <code>antfarm/antfarm.go</code> contains all functions used for initializin
 
 File <code>antfarm/bfs.go</code> contains the push-pull functions for linked list which have been used to make queues for FIFO method. The file contains the BFS algorithm itself.
 
-Files <code>antfarm/solve.go</code> and <code>antfarm/structs.go</code> contain auxilary functions to get and process the final result as well ass the structures used throughout the program.
+Files <code>antfarm/solve.go</code> and <code>antfarm/structs.go</code> contain auxilary functions to get and process the final result as well as the structures used throughout the program.
 
 ### Allowed Packages
 
